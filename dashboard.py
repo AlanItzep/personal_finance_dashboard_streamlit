@@ -35,6 +35,21 @@ def load_data():
     df['YearMonth'] = df['value_date'].dt.to_period('M').astype(str)
     
     return df
+
+# Colocamos el botón en la barra lateral para que no ocupe espacio en el dashboard principal
+with st.sidebar:
+    st.markdown("---")
+    # Título para la sección de control
+    st.subheader("Control de Datos")
+    
+    # El botón de recarga
+    if st.button('🔄 Actualizar Datos (Recargar CSV)'):
+        # 1. Limpia la memoria caché de la función load_data
+        st.cache_data.clear()
+        # 2. Forzar la re-ejecución de todo el script
+        st.rerun()
+    st.markdown("---")
+
 df = load_data()
 
 # --- FUNCIÓN PARA CALCULAR MÉTRICAS ---
